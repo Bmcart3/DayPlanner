@@ -4,7 +4,7 @@ $(document).ready(function () {
     $("#currentDay").text(currentDate);
 
 
-    function hourUpdater() { console.log("hello")
+    function hourUpdater() {
         var currentHour = new Date().getHours();
         $(".description").each(function () {
             if ($(this).attr("data-milTime") < currentHour) {
@@ -21,17 +21,32 @@ $(document).ready(function () {
     };
 
     hourUpdater();
-    setInterval(hourUpdater, 1000);
+    setInterval(hourUpdater, 60000);
 
+    $(".saveBtn").on("click", function () {
+        var chores = $(this).siblings(".description").val();
+        var hour = $(this).parent().attr("id");
+        localStorage.setItem(hour, chores);
+        
+    })
+    
+    $("#hour-9 .description").val(localStorage.getItem("hour-9"));
+    $("#hour-10 .description").val(localStorage.getItem("hour-10"));
+    $("#hour-11 .description").val(localStorage.getItem("hour-11"));
+    $("#hour-12 .description").val(localStorage.getItem("hour-12"));
+    $("#hour-13 .description").val(localStorage.getItem("hour-13"));
+    $("#hour-14 .description").val(localStorage.getItem("hour-14"));
+    $("#hour-15 .description").val(localStorage.getItem("hour-15"));
+    $("#hour-16 .description").val(localStorage.getItem("hour-16"));
+    $("#hour-17 .description").val(localStorage.getItem("hour-17"));
 })
 
 
-
 // # JavaScript
-// - Wait for DOM to be "ready", then...
-//   - Create a function to update the hours
-//     - Get the current hour in military time (i.e. 14 for 2pm)
-//     - Loop over all of the .time-blocks
+// - Wait for DOM to be "ready", then... 
+//   - Create a function to update the hours DONE
+//     - Get the current hour in military time (i.e. 14 for 2pm) 
+//     - Loop over all of the .time-blocks 
 //       - Figure out which hour this block represents
 //       - If this block's hour is less than the current hour:
 //         - Add the class "past" to this block
