@@ -4,27 +4,24 @@ $(document).ready(function () {
     $("#currentDay").text(currentDate);
 
 
-    function hourUpdater() {
+    function hourUpdater() { console.log("hello")
         var currentHour = new Date().getHours();
-        for (var i = 0; i < 9; i++) {
-            $(".description").each(function () {
-                if ($(this).attr("data-milTime") < currentHour) {
-                    $(this).addClass("past");
-                } else if ($(this).attr("data-milTime") > currentHour) {
-                    $(this).removeClass("past");
-                    $(this).addClass("future");
-                } else {
-                    $(this).removeClass("past");
-                    $(this).removeClass("future");
-                    $(this).addClass("present");
-                }
-            })
-        }
+        $(".description").each(function () {
+            if ($(this).attr("data-milTime") < currentHour) {
+                $(this).addClass("past");
+            } else if ($(this).attr("data-milTime") > currentHour) {
+                $(this).removeClass("past");
+                $(this).addClass("future");
+            } else {
+                $(this).removeClass("past");
+                $(this).removeClass("future");
+                $(this).addClass("present");
+            }
+        })
     };
 
-
     hourUpdater();
-
+    setInterval(hourUpdater, 1000);
 
 })
 
